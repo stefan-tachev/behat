@@ -25,6 +25,7 @@ RUN apk --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/commun
 
 RUN \
 	# Symlinks php7
+        rm /usr/bin/php && \ 
 	ln -s /usr/bin/php7 /usr/bin/php
 
 ENV COMPOSER_VERSION 1.2.0
@@ -39,9 +40,10 @@ COPY composer.json /opt/behat/composer.json
 RUN \
 	# Install Behat
 	cd /opt/behat && \
-	composer install 2>&1
+	composer install 2>&1 
 
 ENV PATH $PATH:/opt/behat/bin
+
 
 WORKDIR /src
 
